@@ -10,6 +10,7 @@ import ToDoList.ToDoList;
 import QuizGenerator.QuizGenerator;
 import Settings.Settings;
 import About.About;
+import Settings.Login;
 
 import java.sql.Connection;
 import java.util.Scanner;
@@ -20,7 +21,6 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        // Database Connection Test
         try (Connection con = DBConnection.getConnection()) {
 
             if (con == null) {
@@ -37,11 +37,20 @@ public class Main {
             sc.close();
             return;
         }
+         
 
-        // Temporary User ID
-        int userId = 1;
+         Login login = new Login(sc);
 
-        // Creating Module Objects
+        int userId = login.login();
+
+       if (userId == -1) {
+       System.out.println("Login Failed! Exiting...");
+      sc.close();
+      return;
+      }
+       
+
+    
         Home home = new Home(sc, userId);
         Pomodoro pomodoro = new Pomodoro(sc, userId);
         YouTubeManager youtube = new YouTubeManager(sc, userId);
