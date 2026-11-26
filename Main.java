@@ -1,4 +1,4 @@
-
+//
 import Database.DBConnection;
 
 import Home.Home;
@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-
+           // Database Connection Test
         try (Connection con = DBConnection.getConnection()) {
 
             if (con == null) {
